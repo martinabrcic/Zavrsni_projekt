@@ -1,0 +1,16 @@
+Aplikacija sadrzi 3 framea.
+U prvom frameu osoba se moze registrirati ili ako je to vec napravila, moze se logirati s jedinstvenim OIB-om i passwordom.
+Nakon registracije, upisani podaci spremaju se u TreeMapu s jedinstvenim kljucem - OIB-om i detaljima o pacijentu. Bin file se ucita odmah prikom pokretanja 
+aplikacije kako bi sustav moga provjeriti postoji li vec registrirani korisnik. Ako je korisnik registriran, nije mu dozvoljeno to ponovno napraviti nego se samo
+moze logirati. Za polja se vrsi provjera, jesu li unesena kako bi trebala biti. Ukoliko nisu, ispisuje se poruka na zaslonu za korisnika i korisnik se ne dodaje
+u sustav.
+Logiranje je moguce jedino ako taj OIB vec postoji u sustavu.
+Ako je sve u redu, nakon registracije/logiranja se nudi izbor: hoce li se zakazati termin kod doktora ili ce se naruciti lijek.
+Ukoliko se odluci na zakazivanje termina, odabire se jedan od ponudenih izbora, a drugi se onemoguce. Ispisuju se informacije o korisniku koji je zakazao termin
+i ispise se termin. Prikazan je i trenutni datum te vrijeme.
+Korisniku je omoguceno da potvrdu dobije u tekstualnom fileu.
+Ako se odluci na online narucivanje lijekova, odabere se jedan, a ispise se info o pacijentu i koji je lijek odabrao. Dodana je opcija da korisnik exporta 
+potvrdu u PDF-u. Za to je koristena vanjska library koja se moze skinuti ovdje: https://search.maven.org/search?q=a:itextpdf, a dokumentacija:
+http://javadox.com/com.itextpdf/itextpdf/5.5.1/com/itextpdf/text/Chunk.html#skip-navbar_top
+Vanjska library koristena je iz razloga sto Java nema ugradenu opciju za export u PDF. Prvotna ideja bila je da se doda opcija za slanje potvrde emailom,
+ali nazalost zbog nedostatka vremena nije realizirana.
