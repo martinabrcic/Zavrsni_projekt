@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
-import java.util.TreeMap;
 
 public class RegistrationAndLoginFrame extends JFrame {
     /**
@@ -70,13 +68,13 @@ public class RegistrationAndLoginFrame extends JFrame {
                 String birthDate = patientInfoPanelEvent.getPatientDateOfBirth();
                 String disease = patientInfoPanelEvent.getPatientDisease();
                 String email = patientInfoPanelEvent.getPatientEmailAddress();
-                char[] password = patientInfoPanelEvent.getPassword();
 
-                Patient patient = new Patient(name, surname, birthDate, email, OIB, gender, disease, password);
+                Patient patient = new Patient(name, surname, birthDate, email, OIB, gender, disease);
 //
                 if (patient.getPatientName().equals(null)) {
                     return;
                 } else if (patientsStorage.getPatientsTreeMap().containsKey(patientInfoPanel.getOIBField().getText())) {
+
                     System.out.println(patientInfoPanel.getOIBField().getText());
                     JOptionPane.showMessageDialog(null, "Patient with entered OIB already exists in the system!", "Existing patient", JOptionPane.WARNING_MESSAGE);
                     return;
@@ -125,49 +123,22 @@ public class RegistrationAndLoginFrame extends JFrame {
         loginPanel.getLoginButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Patient patient = null;
-                String extractedPassword = null;
-                String extractedOIB = null;
 
-                if (patientsStorage.patientsTreeMap.containsKey(loginPanel.getOIBField().getText())) {
-                    patient = patientsStorage.patientsTreeMap.get(loginPanel.getOIBField().getText());
-                    extractedPassword = String.valueOf(patient.getPassword());
-                    extractedOIB = patient.getPatientOIB();
-                    System.out.println("IZVUCENI PACIJENT " + patient);
-                    System.out.println("Pacijentova password : " + extractedPassword);
-                    System.out.println("Pacijentov OIB " + extractedOIB);
-//                    if (!extractedPassword.equals(String.valueOf(loginPanel.getPasswordField().getPassword())) && !extractedOIB.equals(loginPanel.getOIBField().getText())) {
-//                        System.out.println("Pass" + Arrays.toString(patient.getPassword()));
-//                        System.out.println("OIB" + patient.getPatientOIB());
-//                        //System.out.println("Passwords don't match!" + " Entered password " + Arrays.toString(loginPanel.getPasswordField().getPassword()) + " and the right one" + Arrays.toString(extractedPassword));
-//                        JOptionPane.showMessageDialog(null, "Please enter the correct password for the user ", "WARNING", JOptionPane.WARNING_MESSAGE);
-//                    }
-
-                }
                 System.out.println("Patients Map: " + patientsStorage);
-                String name = null;
-                String surname = null;
-                for (Patient pa : patientsStorage.getPatientsTreeMap().values()) {
-                    name = pa.getPatientName();
-                    System.out.println("Name " + name);
-                    surname = pa.getPatientSurname();
-                    System.out.println("Surname " + surname);
-                }
 
                 if (!loginPanel.checkOIB(loginPanel.getOIBField().getText()) || !loginPanel.checkPassword(loginPanel.getPasswordField().getPassword())) {
                     System.out.println(loginPanel.getOIBField().getText());
                     return;
                 } else if (loginPanel.getOIBField().getText().equals("") || loginPanel.getPasswordField().getPassword().length <= 0) {
                     System.out.println("Some of the fields are empty!");
-                    JOptionPane.showMessageDialog(null, "Please fill OIB and password field to continue!", "WARNING", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(RegistrationAndLoginFrame.this, "Please fill OIB and password field to continue!", "WARNING", JOptionPane.WARNING_MESSAGE);
                     return;
-                } else if (patientsStorage.patientsTreeMap.containsKey(loginPanel.getOIBField().getText()) && extractedPassword.equals(String.valueOf(loginPanel
-                        .getPasswordField().getPassword()))) {
+                } else if (patientsStorage.patientsTreeMap.containsKey(loginPanel.getOIBField().getText())) {
                     System.out.println("This patient is already in the base");
                     String[] choices = {"Visit doctor", "Order medication"};
                     Object defaultChoice = choices[1];
                     int option = JOptionPane.showOptionDialog(null, "Please choose what do you want to do", "Option window", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, choices, defaultChoice);
-                    Patient patient1 = patientsStorage.patientsTreeMap.get(loginPanel.getOIBField().getText());
+                    Patient patient = patientsStorage.patientsTreeMap.get(loginPanel.getOIBField().getText());
                     if (option == JOptionPane.OK_OPTION) {
                         AppointmentFrame appointmentFrame = new AppointmentFrame();
                         appointmentFrame.setVisible(true);
@@ -181,13 +152,11 @@ public class RegistrationAndLoginFrame extends JFrame {
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, " Patient with entered OIB doesn't exist in the system! Please fill the registration form!", "WARNING", JOptionPane.QUESTION_MESSAGE);
-                    System.out.println("Passwords don't match!" + " Entered password " + Arrays.toString(loginPanel.getPasswordField().getPassword()) + " and the right one" + extractedPassword);
                     System.out.println("Please fill the registration form!");
                     return;
                 }
             }
         });
     }
-
 
 }

@@ -11,14 +11,13 @@ public class PatientInfoPanelEvent extends EventObject {
     private String patientOIB;
     private String patientGender;
     private String patientDisease;
-    private char[] password;
 
     public PatientInfoPanelEvent(Object source) {
         super(source);
     }
 
 
-    public PatientInfoPanelEvent(Object source, String name, String surname, String birthDate, String email, String OIB, String gender, String disease, char[] password) {
+    public PatientInfoPanelEvent(Object source, String name, String surname, String birthDate, String email, String OIB, String gender, String disease) {
         super(source);
         this.patientName = name;
         this.patientSurname = surname;
@@ -27,7 +26,6 @@ public class PatientInfoPanelEvent extends EventObject {
         this.patientOIB = OIB;
         this.patientGender = gender;
         this.patientDisease = disease;
-        this.password = password;
     }
 
     public String getPatientName() {
@@ -71,11 +69,5 @@ public class PatientInfoPanelEvent extends EventObject {
                 '}';
     }
 
-    public char[] getPassword() {
-        return password;
-    }
 
-    public void setPassword(char[] password) {
-        this.password = password;
-    }
 }

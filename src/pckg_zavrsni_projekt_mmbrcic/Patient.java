@@ -13,7 +13,6 @@ public class Patient implements Serializable {
     private String patientOIB;
     private String patientGender;
     private String patientDisease;
-    private char [] password;
 
     /**
      *
@@ -25,7 +24,7 @@ public class Patient implements Serializable {
      * @param gender String spol
      * @param disease String bolest
      */
-    public Patient(String name, String surname, String birthDate, String email, String OIB, String gender, String disease, char[] password) {
+    public Patient(String name, String surname, String birthDate, String email, String OIB, String gender, String disease) {
         this.patientName = name;
         this.patientSurname = surname;
         this.patientDateOfBirth = birthDate;
@@ -33,7 +32,6 @@ public class Patient implements Serializable {
         this.patientOIB = OIB;
         this.patientGender = gender;
         this.patientDisease = disease;
-        this.password = password;
     }
 
     public String getPatientName() {
@@ -46,14 +44,6 @@ public class Patient implements Serializable {
 
     public String getPatientOIB() {
         return patientOIB;
-    }
-
-    public char[] getPassword() {
-        return password;
-    }
-
-    public void setPassword(char[] password) {
-        this.password = password;
     }
 
     @Override

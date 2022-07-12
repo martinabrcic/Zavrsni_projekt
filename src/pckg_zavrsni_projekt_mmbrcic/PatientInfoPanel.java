@@ -171,7 +171,7 @@ public class PatientInfoPanel extends JPanel {
                     gender = "Female";
                 }
 
-                PatientInfoPanelEvent patientInfoPanelEvent = new PatientInfoPanelEvent(PatientInfoPanel.this, name, surname, birthDate, email, OIB, gender, disease, password);
+                PatientInfoPanelEvent patientInfoPanelEvent = new PatientInfoPanelEvent(PatientInfoPanel.this, name, surname, birthDate, email, OIB, gender, disease);
 
 
                 patientInfoListener.patientInfoPanelEventOccurred(patientInfoPanelEvent);

@@ -15,7 +15,6 @@ public class PatientsStorage implements Serializable {
     private String patientOIB;
     private String patientGender;
     private String patientDisease;
-    private char[] password;
     TreeMap<String, Patient> patientsTreeMap;
 
     /**
@@ -41,7 +40,7 @@ public class PatientsStorage implements Serializable {
             String lastName = patient.getPatientSurname();
             System.out.println("This patient is already in the base " + firstName + lastName);
 
-        } else if(OIB.equals("")) {
+        } else if(OIB.equals(null)) {
             return;
 
         } else {
@@ -94,12 +93,6 @@ public class PatientsStorage implements Serializable {
         return patientsTreeMap;
     }
 
-    public void checkPasswordAndOIB(String OIB, char[] password) {
-
-
-
-    }
-
     public TreeMap<String, Patient> getPatientsTreeMap() {
         return patientsTreeMap;
     }
@@ -119,23 +112,4 @@ public class PatientsStorage implements Serializable {
                 '}';
     }
 
-    public char[] getPassword() {
-        return password;
-    }
-
-    public void setPassword(char[] password) {
-        this.password = password;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
-
-    public String getPatientOIB() {
-        return patientOIB;
-    }
 }
